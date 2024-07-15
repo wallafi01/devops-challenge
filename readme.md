@@ -159,5 +159,15 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   Proximo , revisar e criar pipeline
 
+**7. Criar Bucket S3**
+
+    O Bucket servira como um repositorio interno da pipeline
+
+    **1. criando Bucket**
+
+    ![alt text](./images/Screenshot_11.png)
+
+
+
 >  This is a challenge by [Coodesh](https://coodesh.com/)
 
