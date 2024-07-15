@@ -120,6 +120,10 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   o arquivo appspec.yml , localizado na raiz do repositorio informará o CodeDeploy Agent sobre os comandos que você deseja executar durante a implantação
 
+  ![alt text](./images/Screenshot_16.png)  
+
+    - colocar nome do repositorio
+
   **arquivos: start_server.sh e set-permissions.sh dentro da pasta script**
 
   Irão inicializar o servidor e setar permissões para o repositorio
@@ -176,8 +180,10 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   ![alt text](./images/Screenshot_15.png)
 
-        - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} // Criar variaveis no repositorio
-        - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} // Criar variaveis no repositorio
+        - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} // Criar variaveis no repositorio , conforme as chave Secretas do usuario 
+
+        - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} // Criar variaveis no repositorio , conforme as chave Secretas do usuario
+
         - aws_region: us-east-1
         - codedeploy_name: app-challenge  //Nome da aplicação criado
         - codedeploy_group: group-app-challenge  // Nome do Grupo de Implantação
