@@ -47,6 +47,10 @@ link p/ Instalação : [terraform](https://developer.hashicorp.com/terraform/tut
 
 **5. Configurar as variaveis para o Deploy na infraestrutra no arquivo variables.tf na raiz do projeto**
 
+  ![alt text](./images/Screenshot_18.png)
+
+  - Observação : Por questões de segurança , e evitar de ter a chave.pem para acessar a instancia no repositorio e recomendado criar a chave .pem na console e adicionar o nome da chave no campo variable "key_pair"
+
 **6. Inicar o terraform via linha de comando** 
 
     - terraform init
