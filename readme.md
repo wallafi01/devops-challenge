@@ -138,7 +138,9 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
         - s3_bucket: s3-app-challenge01  // Nome do bucket
         - s3_folder: deploy // nome da pasta que ficará dentro do bucket
 
-  Irá será disparado apos modificação od repositorio
+        - e descomentar : o bloco  #push: /#branches:main
+
+  Irá será disparado após modificação do repositorio
 
 
 **6. Criar Code Pipeline**
