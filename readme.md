@@ -171,7 +171,7 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
 ![alt text](./images/Screenshot_11.png)
 
-**Desmarcar Bloquear todo acesso público**
+**Manter configurações padrão**
 
 **Ativar Versionamento**
 
