@@ -197,7 +197,7 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
         - e descomentar : o bloco  #push: /#branches:main
 
-  Irá será disparado após modificação do repositorio
+será disparado após modificação do repositorio
 
 
 
