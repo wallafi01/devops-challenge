@@ -33,6 +33,8 @@ O AWS CodeDeploy será responsável por automatizar o deployment na instância E
 
     - Selecione as políticas apropriadas, como AmazonEC2FullAccess, AmazonVPCFullAccess, ou crie uma política personalizada com as permissões necessárias para seu projeto.
 
+    - Criar um Bucket que servirá como um backend e armazenara o arquivo terraform.state gerado
+
 **3.** Instale a AWS CLI na sua máquina. A AWS CLI permite interagir com os serviços da AWS de maneira simplificada e automatizada diretamente do terminal.
 
 link p/ Instalação: [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
