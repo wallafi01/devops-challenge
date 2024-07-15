@@ -18,6 +18,10 @@ O AWS CodeDeploy será responsável por automatizar o deployment na instância E
 - CodePipeline
 - EC2 
 
+## Diagrama da Solução
+
+
+  ![alt text](./images/Diagrama%20Pipeline%20CID%20CD.jpg)
 
 ## Instruções
 
