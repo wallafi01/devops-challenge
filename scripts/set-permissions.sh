@@ -1,3 +1,0 @@
-#!/bin/bash
-source /home/ubuntu/.profile
-chown -R ubuntu:ubuntu /home/ubuntu/<repo-name>
