@@ -124,26 +124,8 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   Irão inicializar o servidor e setar permissões para o repositorio
 
-**5. Trigger Github Actions**
 
-  **arquivo github/workflows/main.yaml** 
-
-  ![alt text](./images/Screenshot_15.png)
-
-        - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} // Criar variaveis no repositorio
-        - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} // Criar variaveis no repositorio
-        - aws_region: us-east-1
-        - codedeploy_name: app-challenge  //Nome da aplicação criado
-        - codedeploy_group: group-app-challenge  // Nome do Grupo de Implantação
-        - s3_bucket: s3-app-challenge01  // Nome do bucket
-        - s3_folder: deploy // nome da pasta que ficará dentro do bucket
-
-        - e descomentar : o bloco  #push: /#branches:main
-
-  Irá será disparado após modificação do repositorio
-
-
-**6. Criar Code Pipeline**
+**5. Criar Code Pipeline**
 
   ir em Code Pipeline > criar Pipeline
 
@@ -171,7 +153,7 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   Proximo , revisar e criar pipeline
 
-**7. Criar Bucket S3**
+**6. Criar Bucket S3**
 
     O Bucket servira como um repositorio interno da pipeline
 
@@ -186,6 +168,27 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 **Criar pasta dentro do bucket**
 
 ![alt text](./images/Screenshot_14.png)
+
+
+**7. Trigger Github Actions**
+
+  **arquivo github/workflows/main.yaml** 
+
+  ![alt text](./images/Screenshot_15.png)
+
+        - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} // Criar variaveis no repositorio
+        - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} // Criar variaveis no repositorio
+        - aws_region: us-east-1
+        - codedeploy_name: app-challenge  //Nome da aplicação criado
+        - codedeploy_group: group-app-challenge  // Nome do Grupo de Implantação
+        - s3_bucket: s3-app-challenge01  // Nome do bucket
+        - s3_folder: deploy // nome da pasta que ficará dentro do bucket
+
+        - e descomentar : o bloco  #push: /#branches:main
+
+  Irá será disparado após modificação do repositorio
+
+
 
 
 
