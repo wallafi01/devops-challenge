@@ -128,11 +128,14 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   ![alt text](./images/Screenshot_16.png)  
 
-    - colocar nome do repositorio
 
-  **arquivos: start_server.sh e set-permissions.sh dentro da pasta script**
+  **arquivo: scripts/deploy.sh**
 
-  Irão inicializar o servidor e setar permissões para o repositorio
+  Será responsavel por fazer o deploy do repositorio
+
+  Gerar um token do repositorio , e criar uma secrets no repositorio com nome "token_git" e adicionaro token
+
+  ![alt text](./images/Screenshot_19.png) 
 
 
 **5. Criar Code Pipeline**
@@ -171,7 +174,7 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   ![alt text](./images/Screenshot_15.png)
 
-        - //Criar variaveis no repositorio , conforme as chave Secreta do usuario//
+        - //Criar secrets no repositorio , conforme as chave Secreta do usuario//
 
         - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} 
         - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} 
