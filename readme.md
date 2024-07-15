@@ -180,9 +180,10 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   ![alt text](./images/Screenshot_15.png)
 
-        - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} 
+        - //Criar variaveis no repositorio , conforme as chave Secreta do usuario//
 
-        - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} // Criar variaveis no repositorio , conforme as chave Secreta do usuario
+        - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} 
+        - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} 
 
         - aws_region: us-east-1
         - codedeploy_name: app-challenge  //Nome da aplicação criado
