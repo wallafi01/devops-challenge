@@ -11,15 +11,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy do Codigo
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Analise do codigo
-        uses: ./github-action-script/ 
-        id: deploy
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          commit_id: ${{ github.sha }}
-          application_name: 'server-challenge'
+    - name: AWS CodeDeploy
+      uses: sourcetoad/aws-codedeploy-action@v1
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        aws_region: us-east-1
+        codedeploy_name: app-challenge
+        codedeploy_group: group-app-challenge
+        codedeploy_register_only: true
+        s3_bucket: s3-app-challenge01
+        s3_folder: deploy
+        max_polling_iterations: 60
+        directory: ./
