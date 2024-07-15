@@ -2,9 +2,12 @@
 
 ## Descrição
 
-Oprocesso de automação do deployment contínuo de aplicações no AWS EC2 através de uma pipeline integrada com GitHub Actions e AWS CodeDeploy. Será iniciada após commits e push no repositório GitHub. Configure GitHub Actions para disparar automaticamente em push para o branch principal, usando um arquivo YAML específico para definir a pipeline. Utilize o AWS CodeDeploy para automatizar o deployment na instância EC2, garantindo eficiência e confiabilidade no processo de atualização contínua da aplicação.
+O processo de automação CI/CD na AWS EC2, através de uma pipeline integrada com GitHub Actions, será composto pelo AWS CodePipeline e AWS CodeDeploy. Esse processo será iniciado automaticamente após commits e push no repositório GitHub.
 
-[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
+GitHub Actions será configurado para disparar automaticamente em push para o branch principal, acionando o início do pipeline. O AWS CodePipeline integrará o repositório GitHub com o AWS CodeDeploy, coordenando todo o fluxo de entrega contínua.
+
+O AWS CodeDeploy será responsável por automatizar o deployment na instância EC2, garantindo a eficiência e a confiabilidade no processo de atualização contínua da aplicação. Com essa configuração, o processo de deployment se torna mais ágil e seguro, minimizando riscos e reduzindo o tempo de inatividade.
+
 
 ### Tecnologias Utilizadas
  
@@ -12,6 +15,7 @@ Oprocesso de automação do deployment contínuo de aplicações no AWS EC2 atra
 - GitHub Actions
 - Terraform
 - CodeDeploy
+- CodePipeline
 - EC2 
 
 
@@ -19,113 +23,137 @@ Oprocesso de automação do deployment contínuo de aplicações no AWS EC2 atra
 
 ## 1 - Subindo a Infraestrutua
 
-1. Para começar, é essencial ter acesso à plataforma AWS para gerenciar seus recursos na nuvem de forma eficiente.
+**1.** Para começar, é essencial ter acesso à plataforma AWS para gerenciar seus recursos na nuvem de forma eficiente.
 
-2. Crie um usuário na AWS e gere "Secret Keys" para acesso seguro aos recursos AWS via linha de comando. É recomendado não compartilhar essas "Secret Keys" para manter a segurança dos seus dados.
+**2.** Crie um usuário na AWS e gere "Secret Keys" para acesso seguro aos recursos AWS via linha de comando. É recomendado não compartilhar essas "Secret Keys" para manter a segurança dos seus dados.
 
     - Selecione as políticas apropriadas, como AmazonEC2FullAccess, AmazonVPCFullAccess, ou crie uma política personalizada com as permissões necessárias para seu projeto.
 
-3. Instale a AWS CLI na sua máquina. A AWS CLI permite interagir com os serviços da AWS de maneira simplificada e automatizada diretamente do terminal.
+**3.** Instale a AWS CLI na sua máquina. A AWS CLI permite interagir com os serviços da AWS de maneira simplificada e automatizada diretamente do terminal.
 
 link p/ Instalação: [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-4. Garanta que o Terraform esteja instalado na sua máquina para gerenciar sua infraestrutura como código na AWS. O Terraform simplifica o provisionamento e a automação de recursos na AWS de forma declarativa e escalável
+**4.** Garanta que o Terraform esteja instalado na sua máquina para gerenciar sua infraestrutura como código na AWS. O Terraform simplifica o provisionamento e a automação de recursos na AWS de forma declarativa e escalável
 
 link p/ Instalação : [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-cli)
 
-5. -  No seu terminal configurar as Secrets Keys do seu usuario
+**5.   No seu terminal configurar as Secrets Keys do seu usuario**
 
     - aws configure
 
-5. Configurar as variaveis para o Deploy na infraestrutra no arquivo variables.tf na raiz do projeto
+**5. Configurar as variaveis para o Deploy na infraestrutra no arquivo variables.tf na raiz do projeto**
 
-6. Inicar o terraform via linha de comando 
+**6. Inicar o terraform via linha de comando** 
 
     - terraform init
 
-7. Verificar se todos os recursos estão subindo corretamente 
+**7. Verificar se todos os recursos estão subindo corretamente**
 
     - terraform plan
 
-8. Caso tudo estiver ok conforme configurado iremos implantar a infraestrtura como codigo 
+**8. Caso tudo estiver ok conforme configurado iremos implantar a infraestrtura como codigo** 
 
     - terraform apply
 
 ## 2 - Piipeline CI/CD
 
-1. GitHub Repositório (Push)
+**1. GitHub Repositório (Push)**
 Após realizar alterações no código-fonte da aplicação , fazer o commit para o repositório GitHub.
 
-2. GitHub Actions (Trigger)
+**2. GitHub Actions (Trigger)**
 GitHub Actions é configurado para monitorar o repositório em busca de alterações no branch principal(main)
 
 Configuração: No diretório .github/workflows/main.yaml, ira definir a pipeline de CI/CD.
 
-3. Criar AWS code Deploy
+**3. Criar AWS code Deploy**
 
 Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o aplicativo CodeDeploy, o grupo de implantação do aplicativo e uma função do IAM que o CodeDeploy pode assumir para acessar as instâncias do EC2.
 
-    ##Criar um aplicativo:## 
+  **Criar um aplicativo:**
     
-    Navegue até o Console do CodeDeploy, no painel esquerdo, clique em “ Aplicativos ” na seção “Implementar” e selecione “Criar aplicativo”.
+  Navegue até o Console do CodeDeploy, no painel esquerdo, clique em “ Aplicativos ” na seção “Implementar” e selecione “Criar aplicativo”.
 
-    ![alt text](image.png)
-
-    Em seguida, forneça o nome do seu aplicativo e use a plataforma “ EC2/On-premises ”.
-
-    ##Criar função do IAM do CodeDeploy##
-
-    Vá para a seção IAM e crie uma nova função
-
-    Imagem
-
-    Use “ AWS Service ” para entidade confiável e selecione “ CodeDeploy ” no menu suspenso para “Use Case”.
-
-    Clique em Avançar e use a política “AWSCodeDeployRole” anexada.
-
-    Imagem
+  ![alt text](./images/Screenshot_1.png)
 
 
-    Dê um nome à função e salve-o.
+  Em seguida, forneça o nome do seu aplicativo e use a plataforma “ EC2/On-premises ”.
 
-    ##Criar um grupo de implantação##
+  #Criar função do IAM do CodeDeploy#
 
-    Vá para o aplicativo que você criou anteriormente e clique em “Criar grupo de implantação”.
+  Vá para a seção IAM e crie uma nova função
 
-    Forneça um nome para seu grupo de implantação e selecione a função que criamos anteriormente para a função de serviço.
+  ![alt text](./images/Screenshot_2.png)
 
-    Você pode deixar o tipo de implantação nas configurações padrão. Selecione “Amazon EC2 instances” para alvos e use tags para identificá-los.
+  Use “ AWS Service ” para entidade confiável e selecione “ CodeDeploy ” no menu suspenso para “Caso de uso”.
 
-    imagem
+  Clique em Avançar e use a política “AWSCodeDeployRole” anexada.
 
-    Selecione “ Nunca ” na configuração do agente, instalaremos o agente CodeDeploy em nosso sistema manualmente para este projeto.
-
-    Você pode selecionar a configuração de implantação “OneAtATime” e habilitar o balanceamento de carga se tiver mais de uma instância , caso contrário, desmarque a opção de balanceamento de carga.
-
-    Em seguida, clique no botão criar grupo de implantação.
-
-4. 
-
-4. Criar arquivo appspec.yml no qual servira de gatilho para o CodeDeploy
+  ![alt text](./images/Screenshot_3.png)
 
 
-## Readme do Repositório
+  Dê um nome à função e salve.
 
-- Deve conter o título do projeto
-- Uma descrição sobre o projeto em frase
-- Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
-- Como instalar e usar o projeto (instruções)
-- Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
-- Se está usando github pessoal, referencie que é um challenge by coodesh:  
+  **Criar um grupo de implantação**
+
+  Vá para o aplicativo que você criou anteriormente e clique em “Criar grupo de implantação”.
+
+  Forneça um nome para seu grupo de implantação e selecione a função que criamos anteriormente para a função de serviço.
+
+  Você pode deixar o tipo de implantação nas configurações padrão. Selecione “Amazon EC2 instances” para alvos e use tags para identificá-los.
+
+  ![alt text](./images/Screenshot_4.png)
+
+  Selecione “ Nunca” na configuração do agente, instalaremos o agente CodeDeploy será instalado no user data da ec2 implantada pelo terraform
+
+  Você pode selecionar a configuração de implantação “OneAtATime” e habilitar o balanceamento de carga se tiver mais de uma instância , caso contrário, desmarque a opção de balanceamento de carga.
+
+  Em seguida, clique no botão criar grupo de implantação.
+
+
+**4. Trigger para o CodeDeploy**
+
+  **arquivo: appspec.yml**
+
+  o arquivo appspec.yml , localizado na raiz do repositorio informará o CodeDeploy Agent sobre os comandos que você deseja executar durante a implantação
+
+  **arquivos: start_server.sh e set-permissions.sh dentro da pasta script**
+
+  Irão inicializar o servidor e setar permissões para o repositorio
+
+**5. Trigger Github Actions**
+
+  **arquivo github/workflows/main.yaml** 
+
+  Irá será disparado apos modificação od repositorio
+
+
+**6. Criar Code Pipeline**
+
+  ir em Code Pipeline > criar Pipeline
+
+  ![alt text](./images/Screenshot_5.png)
+
+  Adicionar repositorio , precisara autenticar ao github 
+
+  ![alt text](./images/Screenshot_6.png)
+
+  Adicionar a branch
+
+  ![alt text](./images/Screenshot_7.png)
+
+  No acionador manter essas configurações
+
+  ![alt text](./images/Screenshot_8.png)
+
+  Ignorar etapa de compilação
+
+  ![alt text](./images/Screenshot_9.png)
+
+  Etapa de implantação , selecionar o CodeDeploy como provedor , Nome do aplicativo eo Grupo de implantação
+
+  ![alt text](./images/Screenshot_10.png)
+
+  Proximo , revisar e criar pipeline
 
 >  This is a challenge by [Coodesh](https://coodesh.com/)
 
-## Finalização e Instruções para a Apresentação
-
-1. Adicione o link do repositório com a sua solução no teste
-2. Verifique se o Readme está bom e faça o commit final em seu repositório;
-3. Envie e aguarde as instruções para seguir. Sucesso e boa sorte. =)
-
-## Suporte
-
-Use a [nossa comunidade](https://discord.gg/rdXbEvjsWu) para tirar dúvidas sobre o processo ou envie uma mensagem diretamente a um especialista no chat da plataforma. 
