@@ -128,6 +128,16 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   **arquivo github/workflows/main.yaml** 
 
+  ![alt text](./images/Screenshot_15.png)
+
+        - aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} // Criar variaveis no repositorio
+        - aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} // Criar variaveis no repositorio
+        - aws_region: us-east-1
+        - codedeploy_name: app-challenge  //Nome da aplicação criado
+        - codedeploy_group: group-app-challenge  // Nome do Grupo de Implantação
+        - s3_bucket: s3-app-challenge01  // Nome do bucket
+        - s3_folder: deploy // nome da pasta que ficará dentro do bucket
+
   Irá será disparado apos modificação od repositorio
 
 
@@ -163,9 +173,19 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
     O Bucket servira como um repositorio interno da pipeline
 
-    **1. criando Bucket**
+**Criando Bucket**
 
-    ![alt text](./images/Screenshot_11.png)
+![alt text](./images/Screenshot_11.png)
+
+**Desmarcar todo acesso público**
+
+**Ativar Versionamento**
+
+**Criar pasta dentro do bucket**
+
+![alt text](./images/Screenshot_14.png)
+
+
 
 
 
