@@ -163,24 +163,9 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
 
   Proximo , revisar e criar pipeline
 
-**6. Criar Bucket S3**
-
-    O Bucket servira como um repositorio interno da pipeline
-
-**Criando Bucket**
-
-![alt text](./images/Screenshot_11.png)
-
-**Manter configurações padrão**
-
-**Ativar Versionamento**
-
-**Criar pasta dentro do bucket**
-
-![alt text](./images/Screenshot_14.png)
 
 
-**7. Trigger Github Actions**
+**6. Trigger Github Actions**
 
   **arquivo github/workflows/main.yaml** 
 
@@ -194,7 +179,7 @@ Configuração: Para configurar o CodeDeploy, você precisa de três coisas: o a
         - aws_region: us-east-1
         - codedeploy_name: app-challenge  //Nome da aplicação criado
         - codedeploy_group: group-app-challenge  // Nome do Grupo de Implantação
-        - s3_bucket: s3-app-challenge01  // Nome do bucket
+        - s3_bucket: s3-app-challenge01  // Nome do do bucket **(no qual foi criado pelo terraform)**
         - s3_folder: deploy // nome da pasta que ficará dentro do bucket
 
         - e descomentar : o bloco  #push: /#branches:main
